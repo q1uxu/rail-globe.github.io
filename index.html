@@ -318,7 +318,7 @@ h1 { margin: 0; font-size: 1.0625rem; line-height: 1.25; font-weight: 600; lette
   const col = k => css.getPropertyValue('--' + k).trim();
   const abs = u => new URL(u, document.baseURI).href;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const WITH_UK = false;      // set from site.json by scripts/build.py
+  const WITH_UK = true;      // set from site.json by scripts/build.py
   const isPhone = () => matchMedia('(max-width: 720px)').matches;
 
   const CLASSES = [
