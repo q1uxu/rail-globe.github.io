@@ -8,7 +8,7 @@
 
 - 先本地预览，再发布。改完在 http://localhost:8765 给用户看（`python3 scripts/serve.py 8765`），用户说“推”才提交和推送。
 - `main` 是线上版本，含中国和日本（日本自 2026-10-08 起，`site.json` 的 `jp` 开关）。含英国铁路的版本在 `with-uk` 分支，不发布成网页。两者只差 `site.json` 的 `uk` 开关和据此生成的数据。
-- 功能改动做在 `main`。同步 `with-uk` 的步骤：切到 `with-uk`，`git merge -X theirs main`，把 `site.json` 的 `uk` 设为 `true`，重跑 `process_osm.py`、`build_graph.py`、`build.py`，提交，推送，切回 `main`。
+- 功能改动做在 `main`。同步 `with-uk` 的步骤：切到 `with-uk`，`git merge -X theirs main`，把 `site.json` 的 `uk` 设为 `true`，重跑 `process_osm.py`、`build_graph.py`、`build.py`，提交，推送，切回 `main`。切换之前先把 `data/raw/design_base/`、`data/raw/routing_input.pkl`、`data/raw/routing_metro.pkl` 另存一份，切回 `main` 后放回去：这三样不入库，英国版重算会把它们换成含英国的，不还原的话之后在 `main` 上单独跑 `design_speeds.py` 或 `build_graph.py` 用的就是英国版的底稿。放回后跑一次 `design_speeds.py`，确认数据文件没有变化。合并时 `site.json` 会取 `main` 的内容，`uk` 要手动改回 `true`。
 - 提交信息不加任何 AI 署名（不写 `Co-Authored-By`）。
 - 用户指出一处断线或画错时，修完后要把同类线路全部核查一遍再回复，不要只修那一处。每次重算数据后运行 `python3 scripts/check_layers.py`，它按下面的规则列出全国范围内画了两条的、中间断开的、急转弯的、互相遮住的、偏离轨道的线路。
 - 自动核查全部为 0 不等于没问题：检查器只能查它想到的情况。重算后还要放大截图看用户指出过的位置，并留意检查器没覆盖的现象（例如站点不在线上）。发现一类新问题，就给检查器补一项。
