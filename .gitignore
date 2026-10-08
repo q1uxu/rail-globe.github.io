@@ -7,3 +7,9 @@ __pycache__/
 # Working reports, logs and screenshots written by the scripts and checks; regenerated on each run
 output/
 .playwright-cli/
+# A local test environment left by another tool; its interpreter is a link to another machine
+.venv/
+# Posters and social-media pictures made from the map; not part of the site
+promo/
+# Working notes passed between sessions on this machine
+WORKLOG.md
